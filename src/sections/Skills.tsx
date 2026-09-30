@@ -164,7 +164,7 @@ export default function Skills() {
     return (
       <section id="skills" className="relative bg-[#050505] overflow-hidden py-16">
         <div className="px-6 md:px-12 max-w-[1600px] mx-auto">
-          <p className="font-mono text-[11px] tracking-widest text-[#E8FF00]">02 / THE ARSENAL</p>
+          <p className="font-mono text-[11px] tracking-widest text-[#E8FF00]">04 / THE ARSENAL</p>
           <h2 className="font-display text-4xl md:text-6xl font-bold text-[#F0F0F0] mt-2">SKILLS</h2>
           <p className="font-mono text-xs text-white/30 mt-3">Swipe or scroll — languages · frameworks · backend · soft skills</p>
         </div>
@@ -187,7 +187,7 @@ export default function Skills() {
     <section id="skills" ref={sectionRef} className="relative bg-[#050505] overflow-hidden">
       <div className="pt-14 pb-4 px-6 md:px-12 max-w-[1600px] mx-auto flex items-end justify-between gap-4">
         <div>
-          <p className="font-mono text-[11px] tracking-widest text-[#E8FF00]">02 / THE ARSENAL</p>
+          <p className="font-mono text-[11px] tracking-widest text-[#E8FF00]">04 / THE ARSENAL</p>
           <h2 className="font-display text-4xl md:text-6xl font-bold text-[#F0F0F0] mt-2">SKILLS</h2>
         </div>
         <span className="hidden md:block font-mono text-[11px] tracking-widest text-white/25">— SCROLL TO EXPLORE → PINNED</span>

@@ -42,7 +42,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between px-6 h-full max-w-[1600px] mx-auto gap-6">
           <motion.a
             href="#"
-            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+            onClick={(e: React.MouseEvent<HTMLAnchorElement>) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             className="font-mono text-lg font-bold tracking-tight text-[#E8FF00] flex items-center gap-2"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
@@ -57,7 +57,7 @@ export default function Navbar() {
               <a
                 key={l.href}
                 href={l.href}
-                onClick={(e) => {
+                onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
                   e.preventDefault();
                   document.querySelector(l.href)?.scrollIntoView({ behavior: "smooth", block: "start" });
                   setOpen(false);
@@ -112,7 +112,7 @@ export default function Navbar() {
                 <motion.a
                   key={l.href}
                   href={l.href}
-                  onClick={(e) => {
+                  onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
                     e.preventDefault();
                     setOpen(false);
                     window.setTimeout(() => document.querySelector(l.href)?.scrollIntoView({ behavior: "smooth" }), 180);

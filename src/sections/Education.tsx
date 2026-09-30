@@ -14,7 +14,7 @@ export default function Education() {
     >
       <div className="max-w-[1600px] mx-auto px-6 md:px-12">
         <p className="font-mono text-[11px] tracking-widest text-[#E8FF00] mb-2">
-          06 / THE PATH
+          07 / THE PATH
         </p>
         <h2 className="font-display text-4xl md:text-6xl font-bold text-[#F0F0F0] mb-16">
           EDUCATION

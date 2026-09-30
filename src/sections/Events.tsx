@@ -74,18 +74,19 @@ export default function Events() {
     return (
       <section id="events" className="relative bg-[#050505] overflow-hidden py-16">
         <div className="px-6 md:px-12 max-w-[1600px] mx-auto">
-          <p className="font-mono text-[11px] tracking-widest text-[#E8FF00]">04 / THE STAGE</p>
-          <h2 className="font-display text-4xl md:text-6xl font-bold text-white mt-2">EXPERIENCE</h2>
-          <p className="font-mono text-xs text-white/30 mt-2">Swipe horizontally on desktop · scroll vertically on mobile</p>
+          <p className="font-mono text-[11px] tracking-widest text-[#E8FF00]">05 / THE STAGE</p>
+          <h2 className="font-display text-4xl md:text-6xl font-bold text-white mt-2">LEADERSHIP & EVENTS</h2>
+          <p className="font-mono text-xs text-white/30 mt-2">20,000+ attendees · VIP speaker coordination · Stage management at scale</p>
         </div>
         <div className="mt-8 px-6 md:px-12 max-w-[1600px] mx-auto flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-thin">
           {events.map((ev, i) => (
-            <article key={ev.id} className="snap-start shrink-0 w-[84vw] max-w-[560px] rounded-2xl border border-white/5 bg-white/[0.02] p-7 md:p-10 flex flex-col gap-6">
+            <article key={ev.id} className="snap-start shrink-0 w-[84vw] max-w-[560px] rounded-2xl border border-white/5 bg-white/[0.02] p-7 md:p-10 flex flex-col gap-5">
               <div className="flex items-center gap-3">
-                <span className="font-mono text-[10px] tracking-widest text-[#E8FF00] border border-[#E8FF00]/20 px-2 py-1 rounded-full">{ev.role.toUpperCase()}</span>
+                <span className="font-mono text-[10px] tracking-widest text-[#E8FF00] border border-[#E8FF00]/20 px-2.5 py-1 rounded-full">{ev.role.toUpperCase()}</span>
                 <span className="font-mono text-[10px] text-white/25">0{i + 1}</span>
               </div>
               <h3 className="font-display text-xl md:text-2xl font-bold text-white leading-tight">{ev.name}</h3>
+              {ev.description && <p className="font-body text-xs md:text-sm text-white/60 leading-relaxed">{ev.description}</p>}
               <p className="font-display text-5xl font-bold text-[#E8FF00]"><AnimatedNumber target={ev.stat} label={ev.statLabel} /></p>
               <div className="flex flex-wrap gap-2">
                 {ev.speakers.map((s) => <span key={s} className="font-mono text-[10px] px-3 py-1 rounded-full border border-white/10 text-white/55">{s}</span>)}
@@ -101,8 +102,8 @@ export default function Events() {
     <section id="events" ref={sectionRef} className="relative bg-[#050505] overflow-hidden">
       <div className="pt-14 pb-4 px-6 md:px-12 max-w-[1600px] mx-auto flex items-end justify-between">
         <div>
-          <p className="font-mono text-[11px] tracking-widest text-[#E8FF00]">04 / THE STAGE</p>
-          <h2 className="font-display text-4xl md:text-6xl font-bold text-white mt-2">EXPERIENCE</h2>
+          <p className="font-mono text-[11px] tracking-widest text-[#E8FF00]">05 / THE STAGE</p>
+          <h2 className="font-display text-4xl md:text-6xl font-bold text-white mt-2">LEADERSHIP & EVENTS</h2>
         </div>
         <span className="hidden md:block font-mono text-[11px] tracking-widest text-white/25">— SCROLL TO EXPLORE → PINNED</span>
       </div>
@@ -118,6 +119,7 @@ export default function Events() {
             <div className="relative z-10 ml-0 md:ml-8">
               <span className="font-mono text-[10px] text-white/30 tracking-wider">0{i + 1}</span>
               <h3 className="font-display text-xl md:text-[26px] font-bold text-white mt-2 leading-tight">{ev.name}</h3>
+              {ev.description && <p className="font-body text-xs md:text-sm text-white/60 mt-3 leading-relaxed max-w-md">{ev.description}</p>}
             </div>
             <div className="relative z-10 ml-0 md:ml-8">
               <p className="font-display text-5xl md:text-6xl font-bold text-[#E8FF00]"><AnimatedNumber target={ev.stat} label={ev.statLabel} /></p>

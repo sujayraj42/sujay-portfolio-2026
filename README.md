@@ -1,73 +1,77 @@
-# React + TypeScript + Vite
+# Sujay Chakravarti — Portfolio 2026
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **Full Stack Web Developer | HTML, CSS, JS · Node.js · MongoDB · Firebase · React | Deploying Real Projects | Co-Founder @ Dev Krafters**
 
-Currently, two official plugins are available:
+[![Live Demo](https://img.shields.io/badge/Live-Portfolio%202026-E8FF00?style=for-the-badge&logo=github)](https://sujayraj42.github.io/sujay-portfolio-2026/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-sujay--2oo5-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/sujay-2oo5)
+[![GitHub](https://img.shields.io/badge/GitHub-sujayraj42-181717?style=for-the-badge&logo=github)](https://github.com/sujayraj42)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ⚡ Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+A creative developer portfolio engineered for performance, precision, and high aesthetic standards. Built from the ground up using **React 19**, **Tailwind CSS**, **Framer Motion**, **Three.js**, **GSAP**, and **Lenis** smooth scrolling.
 
-## Expanding the ESLint configuration
+- **Live URL**: [https://sujayraj42.github.io/sujay-portfolio-2026/](https://sujayraj42.github.io/sujay-portfolio-2026/)
+- **Venture**: Co-Founder at **Dev Krafters** (Web development studio delivering custom applications & B2B platforms).
+- **Education**: 
+  - Master of Computer Applications (MCA) — *Dev Bhoomi Uttarakhand University*
+  - Bachelor of Computer Applications (BCA) — *Lovely Professional University*
+  - Advance Diploma in Computer Application (ADCA) — *Parmar Commercial Institute*
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Core Features
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Interactive 3D & Creative Canvas**: Three.js wireframe icosahedron and a reactive canvas particle grid reacting to cursor physics.
+- **Dedicated Work Experience Section**: Highlighting agency engineering at **Dev Krafters** (Amrjeet Enterprise B2B platform, Google Gemini Vision AI quoting engine, automated WhatsApp pipelines, Puppeteer GST generation) and independent client delivery on **Fiverr**.
+- **9 Shipped Projects**: Comprehensive case studies with interactive detail drawer, tech badges, and source links.
+- **Arsenal (Skills)**: Pinned horizontal desktop slider and responsive mobile cards covering Frontend, Backend, Databases, Testing (Cypress), and Soft Skills.
+- **Stage Management & Leadership**: Documenting 20,000+ attendee conclave stage management (8th Chhatra Sansad India Conclave) and campus leadership.
+- **Verified Certifications**: UC Davis, Meta, Google, University of Michigan, and UC Santa Cruz credentials.
+- **Smooth Smooth-Scroll & Micro-Interactions**: Lenis virtual scrolling with custom physics cursor and accessible fallback for `prefers-reduced-motion`.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🛠 Tech Stack
+
+| Domain | Technologies |
+|---|---|
+| **Core** | React 19, TypeScript, Vite 7 |
+| **Styling** | Tailwind CSS, CSS Custom Properties, Glassmorphism, Dark Mode Tokens |
+| **Motion & 3D** | Framer Motion, GSAP (ScrollTrigger), Three.js (@react-three/fiber), Lenis Scroll |
+| **Testing** | Cypress E2E, ESLint, TypeScript Strict Checks |
+| **Backend & APIs** | Node.js, Express, REST APIs, MongoDB, Firebase, MySQL, Puppeteer, Gemini Vision API |
+| **Deploy** | GitHub Actions CI/CD → GitHub Pages |
+
+---
+
+## 💻 Local Development
+
+```bash
+# Clone the repository
+git clone https://github.com/sujayraj42/sujay-portfolio-2026.git
+
+# Navigate into project directory
+cd sujay-portfolio-2026
+
+# Install dependencies
+npm install
+
+# Start Vite development server
+npm run dev
+
+# Run production build and type checking
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📬 Contact & Connect
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Email**: [sujay983553@gmail.com](mailto:sujay983553@gmail.com) / [sujayraj42@gmail.com](mailto:sujayraj42@gmail.com)
+- **LinkedIn**: [linkedin.com/in/sujay-2oo5](https://www.linkedin.com/in/sujay-2oo5)
+- **GitHub**: [github.com/sujayraj42](https://github.com/sujayraj42)
+- **Location**: Jalandhar, Punjab, India (UTC +5:30)
+
+© 2026 Sujay Chakravarti · Crafted with precision for high-impact engineering teams.

@@ -92,14 +92,11 @@ function DotCanvas() {
           if (glow > 0.02) {
             const a = 0.1 + glow * 0.9;
             ctx.fillStyle = `rgba(232,255,0,${a})`;
-            // @ts-expect-error shadow props ok
             ctx.shadowColor = "#E8FF00";
-            // @ts-expect-error
             ctx.shadowBlur = glow * 10;
             ctx.beginPath();
             ctx.arc(px, py, r + glow * 1.1, 0, Math.PI * 2);
             ctx.fill();
-            // @ts-expect-error
             ctx.shadowBlur = 0;
           } else {
             ctx.fillStyle = "rgba(255,255,255,0.08)";
@@ -128,12 +125,14 @@ const slotWords = ["Builder.", "Creator.", "Coder.", "Innovator."];
 function CodeCard() {
   const lines = [
     "const sujay = {",
-    "  role: 'Full Stack Developer',",
-    "  stack: ['React', 'Node.js', 'MongoDB', 'MySQL'],",
+    "  role: 'Full Stack Developer & Co-Founder',",
+    "  studio: 'Dev Krafters',",
+    "  stack: ['React', 'Node.js', 'MongoDB', 'Firebase'],",
+    "  topSkills: ['Cypress', 'REST APIs', 'Tailwind CSS'],",
     "  status: 'OPEN_TO_WORK',",
-    "  location: 'Jalandhar, IN',",
+    "  location: 'Jalandhar, Punjab, IN',",
     "};",
-    "sujay.ship(); // 8 projects → prod",
+    "sujay.ship(); // 9 projects live → prod",
   ];
   const [visible, setVisible] = useState(0);
   useEffect(() => {
@@ -142,7 +141,7 @@ function CodeCard() {
       i += 1;
       setVisible(i);
       if (i >= lines.length) window.clearInterval(id);
-    }, 220);
+    }, 200);
     return () => window.clearInterval(id);
   }, []);
   return (
@@ -189,14 +188,14 @@ export default function Hero() {
 
       {/* subtle top meta bar */}
       <div className="absolute top-[58px] left-0 right-0 hidden md:flex justify-between px-12 max-w-[1600px] mx-auto w-full pointer-events-none">
-        <span className="font-mono text-[10px] tracking-[0.2em] text-white/30">EST. 2005 · JALANDHAR</span>
-        <span className="font-mono text-[10px] tracking-[0.2em] text-white/30">SCROLL TO EXPLORE — 00/07</span>
+        <span className="font-mono text-[10px] tracking-[0.2em] text-white/30">EST. 2005 · JALANDHAR, PUNJAB</span>
+        <span className="font-mono text-[10px] tracking-[0.2em] text-white/30">DEV KRAFTERS CO-FOUNDER · 00/08</span>
       </div>
 
       <motion.div style={{ y: yTitle, opacity: opacityHero }} className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 pt-28 pb-10 md:pb-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
         <div className="lg:col-span-7">
-          <motion.p className="font-mono text-[11px] md:text-xs tracking-[0.18em] text-white/35 mb-3" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}>
-            — FULL STACK DEVELOPER · OPEN TO WORK · 8 SHIPPED PROJECTS
+          <motion.p className="font-mono text-[11px] md:text-xs tracking-[0.18em] text-white/40 mb-3" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}>
+            — FULL STACK DEVELOPER · CO-FOUNDER @ DEV KRAFTERS · OPEN TO WORK
           </motion.p>
 
           <div className="overflow-hidden">
@@ -221,20 +220,21 @@ export default function Hero() {
               </AnimatePresence>
             </div>
             <span className="hidden md:inline h-4 w-px bg-white/10" />
-            <span className="font-mono text-xs text-white/45">React · Node · MongoDB · MySQL · Tailwind</span>
+            <span className="font-mono text-xs text-white/50">React · Node.js · MongoDB · Firebase · Cypress · Tailwind</span>
           </div>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <button onClick={() => scrollTo("#work")} className="px-6 py-3 rounded-full bg-[#E8FF00] text-black font-mono text-xs tracking-widest hover:brightness-110 active:scale-[0.98] transition">EXPLORE WORK —→</button>
+            <button onClick={() => scrollTo("#experience")} className="px-6 py-3 rounded-full bg-[#E8FF00] text-black font-mono text-xs tracking-widest hover:brightness-110 active:scale-[0.98] transition">EXPERIENCE —→</button>
+            <button onClick={() => scrollTo("#work")} className="px-6 py-3 rounded-full border border-white/15 text-white font-mono text-xs tracking-widest hover:border-[#E8FF00]/60 hover:text-[#E8FF00] transition">VIEW PROJECTS</button>
             <a href="https://github.com/sujayraj42" target="_blank" rel="noreferrer" className="px-6 py-3 rounded-full border border-white/10 text-white/80 font-mono text-xs tracking-widest hover:border-[#E8FF00]/40 hover:text-[#E8FF00] transition">GITHUB</a>
             <a href="https://linkedin.com/in/sujay-2oo5/" target="_blank" rel="noreferrer" className="px-6 py-3 rounded-full border border-white/10 text-white/80 font-mono text-xs tracking-widest hover:border-[#E8FF00]/40 hover:text-[#E8FF00] transition">LINKEDIN</a>
           </div>
 
           <div className="mt-8 grid grid-cols-3 gap-4 max-w-[520px] border-t border-white/10 pt-5">
             {[
-              { k: "Projects", v: "8" },
-              { k: "Events led", v: "4 · 20K+" },
-              { k: "Stack", v: "Full Stack" },
+              { k: "Studio", v: "Dev Krafters" },
+              { k: "Projects", v: "9 Shipped" },
+              { k: "Stage Led", v: "20,000+" },
             ].map((s) => (
               <div key={s.k}>
                 <div className="font-mono text-[10px] tracking-widest text-white/35">{s.k.toUpperCase()}</div>
@@ -246,7 +246,7 @@ export default function Hero() {
 
         <div className="lg:col-span-5 flex flex-col items-start lg:items-end gap-6">
           <CodeCard />
-          <div className="hidden lg:block font-mono text-[10px] tracking-widest text-white/20 vertical-text">BCA · LPU · JALANDHAR · 2026 — CRAFTING FOR TOP STUDIOS</div>
+          <div className="hidden lg:block font-mono text-[10px] tracking-widest text-white/25 vertical-text">DEV KRAFTERS · MCA & BCA · JALANDHAR · FULL STACK BUILDER</div>
         </div>
       </motion.div>
 

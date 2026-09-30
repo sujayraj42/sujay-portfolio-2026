@@ -7,8 +7,9 @@ import Cursor from "@/components/Cursor";
 import ScrollProgress from "@/components/ScrollProgress";
 import Hero from "@/sections/Hero";
 import About from "@/sections/About";
-import Skills from "@/sections/Skills";
+import Experience from "@/sections/Experience";
 import Projects from "@/sections/Projects";
+import Skills from "@/sections/Skills";
 import Events from "@/sections/Events";
 import Certifications from "@/sections/Certifications";
 import Education from "@/sections/Education";
@@ -47,8 +48,9 @@ function App() {
       <main id="main">
         <Hero />
         <About />
-        <Skills />
+        <Experience />
         <Projects />
+        <Skills />
         <Events />
         <Certifications />
         <Education />

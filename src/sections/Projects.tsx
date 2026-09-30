@@ -27,7 +27,7 @@ export default function Projects() {
             <div>
               <p className="font-mono text-[11px] tracking-[0.2em] text-[#E8FF00]">03 / THE WORK</p>
               <h2 className="font-display text-4xl md:text-6xl font-bold text-white mt-2">PROJECTS</h2>
-              <p className="font-mono text-xs text-white/30 mt-2">8 shipped · hover for preview · click for details</p>
+              <p className="font-mono text-xs text-white/30 mt-2">9 shipped · hover for preview · click for details</p>
             </div>
             <span className="hidden md:block font-mono text-[11px] tracking-widest text-white/20">— FULL-STACK · PRODUCT · CRAFT</span>
           </div>
@@ -50,10 +50,17 @@ export default function Projects() {
                     <span className={`font-mono text-lg md:text-2xl text-[#E8FF00] transition-all duration-300 ${activeId === p.id ? "translate-x-0 opacity-100" : "translate-x-2 opacity-0 md:opacity-0"} hidden md:inline`}>→</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-display text-[18px] md:text-[32px] font-bold text-white group-hover:translate-x-1 transition-transform duration-300 truncate">
-                      {p.name}
-                      {p.starred ? <span className="text-[#E8FF00] ml-2">★</span> : null}
-                    </h3>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="font-display text-[18px] md:text-[32px] font-bold text-white group-hover:translate-x-1 transition-transform duration-300 truncate">
+                        {p.name}
+                        {p.starred ? <span className="text-[#E8FF00] ml-2">★</span> : null}
+                      </h3>
+                      {p.badge && (
+                        <span className="font-mono text-[9px] md:text-[10px] px-2 py-0.5 rounded-full border border-[#E8FF00]/30 text-[#E8FF00] bg-[#E8FF00]/10 shrink-0">
+                          {p.badge}
+                        </span>
+                      )}
+                    </div>
                     {p.subtitle ? <p className="font-mono text-xs text-white/35 mt-1 truncate">{p.subtitle}</p> : null}
                     <p className="md:hidden font-mono text-[11px] text-white/40 mt-1 line-clamp-2">{p.description}</p>
                     <div className="md:hidden flex flex-wrap gap-1.5 mt-2">
@@ -123,7 +130,7 @@ function ProjectDrawer({ project, onClose }: { project: (typeof projects)[number
           <button onClick={onClose} className="font-mono text-xs tracking-widest text-white/40 hover:text-white transition flex items-center gap-2">
             ← CLOSE <span className="text-[10px] border border-white/10 rounded px-1.5 py-0.5">ESC</span>
           </button>
-          <span className="inline-block mt-8 font-mono text-[11px] tracking-widest text-[#E8FF00]">PROJECT {project.index} · {project.year}</span>
+          <span className="inline-block mt-8 font-mono text-[11px] tracking-widest text-[#E8FF00]">PROJECT {project.index} · {project.year} {project.badge ? `· ${project.badge}` : ""}</span>
           <h2 className="font-display text-3xl md:text-5xl font-bold text-white mt-2 leading-tight">{project.name}</h2>
           {project.subtitle ? <p className="font-display text-lg text-white/40 mt-2">{project.subtitle}</p> : null}
           <div className="h-px w-full bg-[#E8FF00]/30 my-7" />

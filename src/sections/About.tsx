@@ -56,10 +56,11 @@ export default function About() {
 
           <div className="hidden md:flex flex-col gap-3 mt-8">
             {[
-              { y: "2020", l: "Started coding" },
-              { y: "2022", l: "Higher Secondary — Science" },
-              { y: "2023", l: "BCA @ LPU" },
-              { y: "2026", l: "Open to top studios", active: true },
+              { y: "2020", l: "Started programming journey" },
+              { y: "2022", l: "ADCA & Higher Secondary (Science)" },
+              { y: "2023", l: "BCA @ Lovely Professional University" },
+              { y: "2025", l: "Co-Founded Dev Krafters Studio" },
+              { y: "2026", l: "MCA @ DBUU · Open to full-stack roles", active: true },
             ].map((t) => (
               <div key={t.y} className="flex items-center gap-3">
                 <span className={`w-2 h-2 rounded-full ${t.active ? "bg-[#E8FF00] shadow-[0_0_10px_rgba(232,255,0,0.8)]" : "bg-white/20"}`} />
@@ -87,9 +88,13 @@ export default function About() {
             })}
           </p>
 
+          <p className="font-body text-sm md:text-base text-white/60 mt-5 leading-relaxed">
+            I'm a self-driven Full Stack Web Developer and builder who takes ideas from concept to live deployment — not just localhost repos, but real production apps on the internet. As Co-Founder of <span className="text-[#E8FF00] font-semibold">Dev Krafters</span>, I engineer custom B2B applications with Gemini Vision AI quoting, WhatsApp pipelines, and automated GST generation.
+          </p>
+
           <div className="mt-6 flex flex-wrap gap-2">
-            {["Pixel-perfect", "REST APIs", "JWT/RBAC", "MongoDB", "MySQL", "Lenis + GSAP", "Three.js"].map((k) => (
-              <span key={k} className="font-mono text-[11px] px-3 py-1 rounded-full border border-white/10 bg-white/[0.02] text-white/60">{k}</span>
+            {["React", "Node.js", "MongoDB", "Firebase", "Cypress", "REST APIs", "Tailwind CSS", "Gemini Vision API", "Puppeteer", "GSAP & Three.js"].map((k) => (
+              <span key={k} className="font-mono text-[11px] px-3 py-1 rounded-full border border-white/10 bg-white/[0.02] text-white/70 hover:border-[#E8FF00]/30 hover:text-[#E8FF00] transition-colors">{k}</span>
             ))}
           </div>
 
@@ -98,8 +103,8 @@ export default function About() {
           </div>
 
           <div className="mt-8 flex gap-3">
-            <a href="#work" className="px-6 py-3 rounded-full bg-[#E8FF00] text-black font-mono text-xs tracking-widest hover:brightness-110 transition">SEE WORK →</a>
-            <a href="#contact" className="px-6 py-3 rounded-full border border-white/10 text-white/80 font-mono text-xs tracking-widest hover:border-[#E8FF00]/40 hover:text-[#E8FF00] transition">LET'S TALK</a>
+            <a href="#experience" className="px-6 py-3 rounded-full bg-[#E8FF00] text-black font-mono text-xs tracking-widest hover:brightness-110 transition">EXPERIENCE →</a>
+            <a href="#work" className="px-6 py-3 rounded-full border border-white/10 text-white/80 font-mono text-xs tracking-widest hover:border-[#E8FF00]/40 hover:text-[#E8FF00] transition">SEE WORK</a>
           </div>
         </div>
       </div>

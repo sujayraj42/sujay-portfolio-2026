@@ -40,9 +40,9 @@ function CertCard({ cert, index }: { cert: (typeof certifications)[number]; inde
 export default function Certifications() {
   return (
     <section id="certs" className="relative w-full py-20 md:py-32 bg-[#050505] overflow-hidden border-t border-white/[0.04]">
-      <div className="absolute top-1/2 right-6 -translate-y-1/2 watermark opacity-[0.04] select-none pointer-events-none hidden md:block">05</div>
+      <div className="absolute top-1/2 right-6 -translate-y-1/2 watermark opacity-[0.04] select-none pointer-events-none hidden md:block">06</div>
       <div className="relative max-w-[1600px] mx-auto px-6 md:px-12">
-        <p className="font-mono text-[11px] tracking-[0.2em] text-[#E8FF00]">05 / THE PROOF</p>
+        <p className="font-mono text-[11px] tracking-[0.2em] text-[#E8FF00]">06 / THE PROOF</p>
         <h2 className="font-display text-4xl md:text-6xl font-bold text-white mt-2">CERTIFICATIONS</h2>
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {certifications.map((c, i) => (

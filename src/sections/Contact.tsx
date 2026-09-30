@@ -20,7 +20,7 @@ export default function Contact() {
     const subject = encodeURIComponent(`Portfolio inquiry — ${form.name}`);
     const body = encodeURIComponent(`From: ${form.name} <${form.email}>\n\n${form.message}\n\n— sent from sujay-portfolio-2026`);
     // Try mailto; also show success so portfolio feels complete even without backend
-    window.location.href = `mailto:sujayraj42@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:sujay983553@gmail.com?subject=${subject}&body=${body}`;
     setSent(true);
     window.setTimeout(() => setSent(false), 4000);
     setForm({ name: "", email: "", message: "" });
@@ -31,18 +31,18 @@ export default function Contact() {
       <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-16 md:py-28">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-7">
-            <p className="font-mono text-[11px] tracking-[0.2em] text-[#E8FF00]">07 / THE HANDSHAKE</p>
+            <p className="font-mono text-[11px] tracking-[0.2em] text-[#E8FF00]">08 / THE HANDSHAKE</p>
             <motion.h2 className="font-display text-[44px] md:text-[92px] font-bold leading-[0.9] tracking-[-0.04em] text-white mt-3" initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
               LET'S TALK <span className="text-[#E8FF00]">→</span>
             </motion.h2>
             <motion.p className="font-body text-base md:text-lg text-white/50 mt-6 max-w-lg" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.2 }}>
-              Available for internships & junior Full Stack roles. Top studios — if you value craft, performance and clean code, let's build.
+              Available for Full Stack roles, client partnerships & engineering opportunities. If you value speed, craft, and production-tested systems, let's build together.
             </motion.p>
             <div className="flex flex-wrap items-center gap-3 mt-6">
               <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-300 font-mono text-xs">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" /> Open to Work
               </span>
-              <span className="font-mono text-xs text-white/30">Jalandhar, Punjab · India · UTC+5:30</span>
+              <span className="font-mono text-xs text-white/40">Jalandhar, Punjab · India · UTC+5:30</span>
             </div>
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl">
               <a href="https://linkedin.com/in/sujay-2oo5/" target="_blank" rel="noreferrer" className="group flex items-center justify-between p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-[#E8FF00]/30 transition-colors">
@@ -53,9 +53,9 @@ export default function Contact() {
                 <span className="font-display font-semibold text-white">GitHub</span>
                 <span className="font-mono text-xs text-white/30 group-hover:text-[#E8FF00]">sujayraj42 →</span>
               </a>
-              <a href="mailto:sujayraj42@gmail.com" className="group flex items-center justify-between p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-[#E8FF00]/30 transition-colors sm:col-span-2">
+              <a href="mailto:sujay983553@gmail.com" className="group flex items-center justify-between p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-[#E8FF00]/30 transition-colors sm:col-span-2">
                 <span className="font-mono text-xs text-white/30">EMAIL</span>
-                <span className="font-mono text-xs text-white group-hover:text-[#E8FF00] break-all">sujayraj42@gmail.com →</span>
+                <span className="font-mono text-xs text-white group-hover:text-[#E8FF00] break-all">sujay983553@gmail.com →</span>
               </a>
             </div>
           </div>
