@@ -6,70 +6,69 @@ export default function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const ringPos = useRef({ x: 0, y: 0 });
-  const isHovering = useRef(false);
-  const isProjectHover = useRef(false);
+  const hoverRef = useRef(false);
+  const projectRef = useRef(false);
+  const hiddenRef = useRef(false);
 
   useEffect(() => {
-    let raf: number;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let raf = 0;
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
-    const animate = () => {
-      ringPos.current.x = lerp(ringPos.current.x, x, 0.12);
-      ringPos.current.y = lerp(ringPos.current.y, y, 0.12);
-
+    const frame = () => {
+      ringPos.current.x = lerp(ringPos.current.x, x, 0.14);
+      ringPos.current.y = lerp(ringPos.current.y, y, 0.14);
       if (dotRef.current) {
+        const op = hiddenRef.current ? 0 : 1;
         dotRef.current.style.transform = `translate(${x - 4}px, ${y - 4}px)`;
+        dotRef.current.style.opacity = String(op);
       }
       if (ringRef.current) {
-        const scale = isHovering.current ? 1.5 : 1;
-        const rotation = isHovering.current ? 45 : 0;
-        const crosshair = isProjectHover.current ? "scale(0.8)" : "";
-        ringRef.current.style.transform = `translate(${ringPos.current.x - 20}px, ${ringPos.current.y - 20}px) scale(${scale}) rotate(${rotation}deg) ${crosshair}`;
+        const s = hoverRef.current ? 1.45 : 1;
+        const rot = hoverRef.current ? 45 : 0;
+        const extra = projectRef.current ? " scale(0.85)" : "";
+        ringRef.current.style.transform = `translate(${ringPos.current.x - 20}px, ${ringPos.current.y - 20}px) scale(${s}) rotate(${rot}deg)${extra}`;
+        ringRef.current.style.opacity = hiddenRef.current ? "0" : "1";
       }
-      raf = requestAnimationFrame(animate);
+      raf = requestAnimationFrame(frame);
     };
-    raf = requestAnimationFrame(animate);
+    raf = requestAnimationFrame(frame);
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.closest("a, button, [data-hover]")) {
-        isHovering.current = true;
-      }
-      if (target.closest("[data-project-hover]")) {
-        isProjectHover.current = true;
-      }
+    const over = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      hoverRef.current = !!t.closest("a, button, [data-hover]");
+      projectRef.current = !!t.closest("[data-project-hover]");
     };
-    const handleMouseOut = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.closest("a, button, [data-hover]")) {
-        isHovering.current = false;
-      }
-      if (target.closest("[data-project-hover]")) {
-        isProjectHover.current = false;
-      }
+    const out = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      if (t.closest("a, button, [data-hover]")) hoverRef.current = false;
+      if (t.closest("[data-project-hover]")) projectRef.current = false;
     };
+    const leave = () => { hiddenRef.current = true; };
+    const enter = () => { hiddenRef.current = false; };
 
-    document.addEventListener("mouseover", handleMouseOver);
-    document.addEventListener("mouseout", handleMouseOut);
-
+    document.addEventListener("mouseover", over);
+    document.addEventListener("mouseout", out);
+    document.addEventListener("mouseleave", leave);
+    document.addEventListener("mouseenter", enter);
     return () => {
       cancelAnimationFrame(raf);
-      document.removeEventListener("mouseover", handleMouseOver);
-      document.removeEventListener("mouseout", handleMouseOut);
+      document.removeEventListener("mouseover", over);
+      document.removeEventListener("mouseout", out);
+      document.removeEventListener("mouseleave", leave);
+      document.removeEventListener("mouseenter", enter);
     };
   }, [x, y]);
 
+  // No custom cursor on touch/coarse pointers
+  if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) return null;
+
   return (
     <>
-      <div
-        ref={dotRef}
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#E8FF00] pointer-events-none z-[10000] mix-blend-difference"
-      />
-      <div
-        ref={ringRef}
-        className="fixed top-0 left-0 w-10 h-10 rounded-full border border-[#E8FF00] pointer-events-none z-[9999] transition-colors"
-        style={{ willChange: "transform" }}
-      />
+      <div ref={dotRef} className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#E8FF00] pointer-events-none z-[10000] max-md:hidden" style={{ willChange: "transform", mixBlendMode: "difference" as never }} aria-hidden />
+      <div ref={ringRef} className="fixed top-0 left-0 w-10 h-10 rounded-full border border-[#E8FF00]/80 pointer-events-none z-[9999] max-md:hidden" style={{ willChange: "transform" }} aria-hidden />
     </>
   );
 }

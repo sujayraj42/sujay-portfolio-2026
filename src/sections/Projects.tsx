@@ -1,232 +1,152 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "@/utils/data";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 
 export default function Projects() {
-  const [activeProject, setActiveProject] = useState<number | null>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [drawerProject, setDrawerProject] = useState<(typeof projects)[0] | null>(null);
-  const listRef = useRef<HTMLDivElement>(null);
+  const [activeId, setActiveId] = useState<number | null>(null);
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [drawer, setDrawer] = useState<(typeof projects)[number] | null>(null);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    setMousePos({ x: e.clientX, y: e.clientY });
-  };
+  useEffect(() => {
+    if (!drawer) return;
+    const prev = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setDrawer(null); };
+    window.addEventListener("keydown", onKey);
+    return () => { document.documentElement.style.overflow = prev; window.removeEventListener("keydown", onKey); };
+  }, [drawer]);
+
+  const onMove = (e: React.MouseEvent) => setMouse({ x: e.clientX, y: e.clientY });
 
   return (
     <>
-      <section
-        id="work"
-        className="relative w-full py-24 md:py-40 bg-[#050505]"
-        onMouseMove={handleMouseMove}
-      >
+      <section id="work" className="relative w-full py-20 md:py-32 bg-[#050505] border-t border-white/[0.04]" onMouseMove={onMove}>
         <div className="max-w-[1600px] mx-auto px-6 md:px-12">
-          <p className="font-mono text-[11px] tracking-widest text-[#E8FF00] mb-2">
-            03 / THE WORK
-          </p>
-          <h2 className="font-display text-4xl md:text-6xl font-bold text-[#F0F0F0] mb-16">
-            PROJECTS
-          </h2>
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <p className="font-mono text-[11px] tracking-[0.2em] text-[#E8FF00]">03 / THE WORK</p>
+              <h2 className="font-display text-4xl md:text-6xl font-bold text-white mt-2">PROJECTS</h2>
+              <p className="font-mono text-xs text-white/30 mt-2">8 shipped · hover for preview · click for details</p>
+            </div>
+            <span className="hidden md:block font-mono text-[11px] tracking-widest text-white/20">— FULL-STACK · PRODUCT · CRAFT</span>
+          </div>
 
-          <div ref={listRef} className="flex flex-col">
-            {projects.map((project) => (
-              <div
-                key={project.id}
+          <div className="mt-10 flex flex-col">
+            {projects.map((p) => (
+              <button
+                key={p.id}
                 data-project-hover
-                className="group relative border-b border-white/10 py-6 md:py-8 transition-colors hover:bg-[#E8FF00]/5"
-                onMouseEnter={() => setActiveProject(project.id)}
-                onMouseLeave={() => setActiveProject(null)}
-                onClick={() => setDrawerProject(project)}
+                onMouseEnter={() => setActiveId(p.id)}
+                onMouseLeave={() => setActiveId(null)}
+                onClick={() => setDrawer(p)}
+                onFocus={() => setActiveId(p.id)}
+                onBlur={() => setActiveId(null)}
+                className="group text-left relative border-b border-white/10 py-5 md:py-7 transition-colors hover:bg-[#E8FF00]/[0.04] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8FF00]/40"
               >
-                <div className="flex items-center justify-between gap-4">
-                  {/* Index number */}
-                  <div className="w-16 md:w-24 flex-shrink-0 overflow-hidden">
-                    <span className="font-mono text-xl md:text-3xl text-[#555] group-hover:text-[#E8FF00] transition-colors">
-                      {project.index}
-                    </span>
-                    <motion.span
-                      className="font-mono text-xl md:text-3xl text-[#E8FF00] block"
-                      initial={{ y: 40 }}
-                      animate={{ y: activeProject === project.id ? 0 : 40 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      →
-                    </motion.span>
+                <div className="flex items-center gap-4 md:gap-6">
+                  <div className="w-14 md:w-20 shrink-0 flex items-center gap-2">
+                    <span className="font-mono text-lg md:text-2xl text-white/25 group-hover:text-[#E8FF00] transition-colors">{p.index}</span>
+                    <span className={`font-mono text-lg md:text-2xl text-[#E8FF00] transition-all duration-300 ${activeId === p.id ? "translate-x-0 opacity-100" : "translate-x-2 opacity-0 md:opacity-0"} hidden md:inline`}>→</span>
                   </div>
-
-                  {/* Project name */}
-                  <div className="flex-1">
-                    <h3 className="font-display text-xl md:text-[40px] font-bold text-[#F0F0F0] group-hover:translate-x-5 transition-transform duration-300">
-                      {project.name}
-                      {project.subtitle && (
-                        <span className="text-[#555] text-lg md:text-2xl font-normal">
-                          {" "}
-                          — {project.subtitle}
-                        </span>
-                      )}
-                      {project.starred && (
-                        <span className="text-[#E8FF00] ml-2">★</span>
-                      )}
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-display text-[18px] md:text-[32px] font-bold text-white group-hover:translate-x-1 transition-transform duration-300 truncate">
+                      {p.name}
+                      {p.starred ? <span className="text-[#E8FF00] ml-2">★</span> : null}
                     </h3>
+                    {p.subtitle ? <p className="font-mono text-xs text-white/35 mt-1 truncate">{p.subtitle}</p> : null}
+                    <p className="md:hidden font-mono text-[11px] text-white/40 mt-1 line-clamp-2">{p.description}</p>
+                    <div className="md:hidden flex flex-wrap gap-1.5 mt-2">
+                      {p.tech.slice(0, 3).map((t) => <span key={t} className="font-mono text-[10px] px-2 py-1 rounded-full border border-white/10 text-white/40">{t}</span>)}
+                    </div>
                   </div>
-
-                  {/* Tech + year */}
-                  <div className="hidden md:flex items-center gap-4">
-                    <div className="flex gap-2">
-                      {project.tech.slice(0, 3).map((t) => (
-                        <span
-                          key={t}
-                          className="font-mono text-[10px] px-2 py-1 rounded border border-white/10 text-[#555]"
-                        >
-                          {t}
-                        </span>
+                  <div className="hidden md:flex items-center gap-3 shrink-0">
+                    <div className="hidden lg:flex gap-1.5">
+                      {p.tech.slice(0, 3).map((t) => (
+                        <span key={t} className="font-mono text-[10px] px-2 py-1 rounded-full border border-white/10 text-white/40 group-hover:border-[#E8FF00]/20 group-hover:text-white/60 transition-colors">{t}</span>
                       ))}
                     </div>
-                    <span className="font-mono text-xs text-[#555]">
-                      {project.year}
-                    </span>
+                    <span className="font-mono text-xs text-white/25 bg-white/[0.03] border border-white/5 px-2 py-1 rounded-full">{p.year}</span>
                   </div>
+                  <span className="md:hidden font-mono text-[10px] text-white/20">{p.year}</span>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
 
-        {/* Floating preview card */}
         <AnimatePresence>
-          {activeProject !== null && (
+          {activeId !== null && (
             <motion.div
               className="fixed z-50 w-72 pointer-events-none hidden md:block"
-              style={{
-                left: mousePos.x + 20,
-                top: mousePos.y - 40,
-              }}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.2 }}
+              style={{ left: mouse.x + 18, top: mouse.y - 20 }}
+              initial={{ opacity: 0, scale: 0.96, y: 6 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 6 }}
+              transition={{ duration: 0.18 }}
             >
-              <div className="glass rounded-lg p-4">
-                <p className="font-body text-sm text-[#F0F0F0]/80 leading-relaxed">
-                  {projects.find((p) => p.id === activeProject)?.description}
-                </p>
+              <div className="glass rounded-xl p-4 border border-white/10 bg-[#0a0a0a]/90 backdrop-blur">
+                <p className="font-mono text-[11px] tracking-widest text-[#E8FF00]">PREVIEW</p>
+                <p className="font-body text-sm text-white/75 leading-relaxed mt-2">{projects.find((x) => x.id === activeId)?.description}</p>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
       </section>
 
-      {/* Project Drawer */}
       <AnimatePresence>
-        {drawerProject && (
-          <ProjectDrawer
-            project={drawerProject}
-            onClose={() => setDrawerProject(null)}
-          />
-        )}
+        {drawer && <ProjectDrawer project={drawer} onClose={() => setDrawer(null)} />}
       </AnimatePresence>
     </>
   );
 }
 
-function ProjectDrawer({
-  project,
-  onClose,
-}: {
-  project: (typeof projects)[0];
-  onClose: () => void;
-}) {
+function ProjectDrawer({ project, onClose }: { project: (typeof projects)[number]; onClose: () => void }) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  useEffect(() => { panelRef.current?.focus(); }, []);
   return (
-    <motion.div
-      className="fixed inset-0 z-[150] flex justify-end"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/60"
-        onClick={onClose}
-      />
-
-      {/* Drawer */}
+    <motion.div className="fixed inset-0 z-[150] flex justify-end" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+      <button aria-label="Close drawer backdrop" className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" onClick={onClose} />
       <motion.div
-        className="relative w-[90vw] max-w-[900px] h-full bg-[#0a0a0a] border-l border-white/10 overflow-y-auto"
+        ref={panelRef}
+        tabIndex={-1}
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${project.name} details`}
+        className="relative w-[92vw] max-w-[880px] h-full bg-[#0a0a0a] border-l border-white/10 overflow-y-auto outline-none"
         initial={{ x: "100%" }}
         animate={{ x: 0 }}
         exit={{ x: "100%" }}
         transition={{ type: "spring", damping: 30, stiffness: 300 }}
       >
-        <div className="p-8 md:p-16">
-          <button
-            onClick={onClose}
-            className="font-mono text-xs text-[#555] hover:text-[#F0F0F0] mb-12 block"
-          >
-            ← CLOSE
+        <div className="p-7 md:p-12">
+          <button onClick={onClose} className="font-mono text-xs tracking-widest text-white/40 hover:text-white transition flex items-center gap-2">
+            ← CLOSE <span className="text-[10px] border border-white/10 rounded px-1.5 py-0.5">ESC</span>
           </button>
-
-          <span className="font-mono text-[11px] text-[#E8FF00] tracking-widest">
-            PROJECT {project.index}
-          </span>
-          <h2 className="font-display text-4xl md:text-6xl font-bold text-[#F0F0F0] mt-2">
-            {project.name}
-          </h2>
-          {project.subtitle && (
-            <p className="font-display text-xl text-[#555] mt-2">
-              {project.subtitle}
-            </p>
-          )}
-
-          <div className="h-[2px] w-full bg-[#E8FF00] my-8 origin-left" />
-
-          <p className="font-body text-lg text-[#F0F0F0]/80 leading-relaxed max-w-2xl">
-            {project.description}
-          </p>
-
+          <span className="inline-block mt-8 font-mono text-[11px] tracking-widest text-[#E8FF00]">PROJECT {project.index} · {project.year}</span>
+          <h2 className="font-display text-3xl md:text-5xl font-bold text-white mt-2 leading-tight">{project.name}</h2>
+          {project.subtitle ? <p className="font-display text-lg text-white/40 mt-2">{project.subtitle}</p> : null}
+          <div className="h-px w-full bg-[#E8FF00]/30 my-7" />
+          <p className="font-body text-[15px] md:text-lg text-white/70 leading-relaxed max-w-2xl">{project.description}</p>
           <div className="mt-8">
-            <p className="font-mono text-[10px] tracking-widest text-[#555] mb-3">
-              TECH STACK
-            </p>
+            <p className="font-mono text-[10px] tracking-widest text-white/30 mb-3">TECH STACK</p>
             <div className="flex flex-wrap gap-2">
-              {project.tech.map((t) => (
-                <span
-                  key={t}
-                  className="font-mono text-xs px-3 py-1 rounded-full border border-[#E8FF00]/30 text-[#E8FF00]"
-                >
-                  {t}
-                </span>
-              ))}
+              {project.tech.map((t) => <span key={t} className="font-mono text-xs px-3 py-1.5 rounded-full border border-[#E8FF00]/25 text-[#E8FF00] bg-[#E8FF00]/5">{t}</span>)}
             </div>
           </div>
-
-          <div className="flex gap-4 mt-12">
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 text-[#F0F0F0] hover:bg-[#E8FF00] hover:text-[#050505] hover:border-[#E8FF00] transition-all"
-              >
-                <FiGithub />
-                <span className="font-mono text-sm">GitHub</span>
+          <div className="flex flex-wrap gap-3 mt-10">
+            {project.github ? (
+              <a href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 text-white hover:bg-[#E8FF00] hover:text-black hover:border-[#E8FF00] transition-colors font-mono text-sm">
+                <FiGithub /> GitHub
               </a>
-            )}
-            {project.live && (
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 text-[#F0F0F0] hover:bg-[#E8FF00] hover:text-[#050505] hover:border-[#E8FF00] transition-all"
-              >
-                <FiExternalLink />
-                <span className="font-mono text-sm">Live Site</span>
+            ) : null}
+            {project.live ? (
+              <a href={project.live} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#E8FF00] text-black hover:brightness-110 transition font-mono text-sm">
+                <FiExternalLink /> Live Site
               </a>
-            )}
+            ) : null}
           </div>
-
-          <div className="mt-12 pt-8 border-t border-white/5">
-            <span className="font-mono text-xs text-[#555]">{project.year}</span>
-          </div>
+          <p className="mt-12 pt-6 border-t border-white/5 font-mono text-xs text-white/25">© 2026 Sujay Chakravarti · Crafted for top studios</p>
         </div>
       </motion.div>
     </motion.div>
